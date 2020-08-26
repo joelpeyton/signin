@@ -39,40 +39,59 @@
                 <div class="collapse navbar-collapse" id="toggleNav">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i>Sign In <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#" id="signinBtn"><i class="fas fa-sign-in-alt"></i>Sign In <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-user-check"></i>Register</a>
+                            <a class="nav-link" href="#" id="registerBtn"><i class="fas fa-user-check"></i>Register</a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
             <!-- Heading -->
-            <h1 class="text-center mb-3">Sign in to Acme</h1>
+            <h1 id="heading" class="text-center mb-3">Sign in to Acme</h1>
 
-            <!-- Form -->
+            <!-- Forms -->
             <div class="col-12 col-lg-6 offset-lg-3 mb-3 box">
-                <form >
+                <!-- Sign in -->
+                <form id="signinForm">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="">
+                        <input type="text" class="form-control" id="usernameSignin" aria-describedby="">
                         <small id="" class="form-text text-muted">Username or email address</small>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                         <input type="password" class="form-control" id="password">
+                         <input type="password" class="form-control" id="passwordSignin">
                     </div>
                     <div class="form-group">
                         <a href="">Forgotten password?</a>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+
+                <!-- Register -->
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="username">Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="usernameRegister" aria-describedby="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="emailRegister" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="passwordRegister" required>
+                        <small id="" class="form-text text-muted">Password must be at least 8 characters long and contain a number and an uppercase letter</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
 
             <!-- New to -->
-            <div class="col-12 col-lg-6 offset-lg-3 box">
-                <span>New to ACME? <a href="">Create an account.</a></span>
+            <div id="registerBox" class="col-12 col-lg-6 offset-lg-3 box">
+                <span>New to ACME? <a href="#" id="registerLink">Create an account.</a></span>
             </div>
 
         </div>
@@ -82,6 +101,8 @@
     <!-- jQuery first, then Bootstrap JS -->
     <script src="../jQuery/jquery-3.5.1.min.js"></script>
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./js/main.js"></script>
     
     </body>
 </html>
