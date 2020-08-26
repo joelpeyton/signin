@@ -24,7 +24,7 @@ function renderSignin() {
     registerBox.style.display = "block";
     heading.innerText = "Sign in to Acme";
     signinBtn.parentElement.classList.add("active");
-    registerBtn.parentElement.classList.register("active");
+    registerBtn.parentElement.classList.remove("active");
 }
 
 function renderRegister() {

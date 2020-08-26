@@ -56,13 +56,13 @@
                 <!-- Sign in -->
                 <form id="signinForm">
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="usernameSignin" aria-describedby="">
+                        <label for="username">Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="usernameSignin" aria-describedby="" required>
                         <small id="" class="form-text text-muted">Username or email address</small>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                         <input type="password" class="form-control" id="passwordSignin">
+                        <label for="password">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="passwordSignin" required>
                     </div>
                     <div class="form-group">
                         <a href="">Forgotten password?</a>
