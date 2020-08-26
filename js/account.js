@@ -1,4 +1,5 @@
 const changePasswordBtn = document.getElementById("changePasswordBtn");
+const signoutBtn = document.getElementById("signoutBtn");
 
 changePasswordBtn.onclick = function() {
     const passwordCollection = document.getElementsByClassName("changePassword");
@@ -8,4 +9,9 @@ changePasswordBtn.onclick = function() {
     };
 
     changePasswordBtn.style.display = "none";
+}
+
+signoutBtn.onclick = function() {
+    // Need to remove capability to press back button to access account
+    window.location.href = "index.html";
 }
