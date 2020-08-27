@@ -51,18 +51,49 @@
             <!-- Heading -->
             <h1 id="heading" class="text-center mb-3">Sign in to Acme</h1>
 
+            <!-- ALERTS -->
+
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <!-- Verfiy email -->
+                <div id="verify" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h3 class="alert-heading">Thanks for registering with Acme Corporation.</h3>
+                    <p>Please open your email and follow the link to verify your account.</p>
+                </div>
+
+                <!-- Unable to send email -->
+                <div id="unableToSendEmail" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <h3 class="alert-heading">Unable to send you an email to verify your account.</h3>
+                    <p>Please contact customer support to verify your account.</p>
+                </div>
+
+                <!-- Unable to create user -->
+                <div id="unableToCreateUser" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h3 class="alert-heading">Unable to create your account.</h3>
+                    <p>Opps! Looks like we encounterd a problem, please try again.</p>
+                    <p>Or contact customer support to set up your account.</p>
+                </div>
+                
+                <!-- Email exists -->
+                <div id="emailExists" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h3 class="alert-heading">Email already registered.</h3>
+                    <p>It looks like that email is already registered.</p>
+                    <p>Please <a href="">sign in</a> to access your account.</p>
+                    <p>Or <a href="">reset your password?</a></p>
+                </div>
+            </div>
+
             <!-- Forms -->
             <div class="col-12 col-lg-6 offset-lg-3 mb-3 box">
                 <!-- Sign in -->
                 <form id="signinForm">
                     <div class="form-group">
-                        <label for="username">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="usernameSignin" aria-describedby="" required>
+                        <label for="signinUsername">Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="signinUsername" name="username" aria-describedby="" required>
                         <small id="" class="form-text text-muted">Username or email address</small>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="passwordSignin" required>
+                        <label for="signinPassword">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="signinPassword" name="password" required>
                     </div>
                     <div class="form-group">
                         <a href="">Forgotten password?</a>
@@ -73,28 +104,28 @@
                 <!-- Register -->
                 <form id="registerForm">
                     <div class="form-group">
-                        <label for="username">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="usernameRegister" aria-describedby="" required>
+                        <label for="registerUsername">Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="registerUsername" name="username" aria-describedby="" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email address <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="emailRegister" required>
+                        <label for="registerEmail">Email address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="registerEmail" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="passwordRegister" required>
+                        <label for="registerPassword">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="registerPassword" name="password" required>
                         <small id="" class="form-text text-muted">Password must be at least 8 characters long and contain a number and an uppercase letter</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Register</button>
                 </form>
-            </div>
+            </div> <!-- End forms -->
 
             <!-- New to -->
             <div id="registerBox" class="col-12 col-lg-6 offset-lg-3 box">
                 <span>New to ACME? <a href="#" id="registerLink">Create an account.</a></span>
             </div>
-
-        </div>
+            
+        </div> <!-- End container -->
         
     <!-- Bootstrap JavaScript -->
     <!-- Optional JavaScript -->
