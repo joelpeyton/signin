@@ -57,39 +57,65 @@
                 <!-- Verfiy email -->
                 <div id="verify" class="alert alert-success alert-dismissible fade show" role="alert">
                     <h3 class="alert-heading">Thanks for registering with Acme Corporation.</h3>
+                    <p>We've sent you a verfication link. Please open your email and follow the link to verify your account.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Resend email -->
+                <div id="resend" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h3 class="alert-heading">We sent you a verfication link.</h3>
                     <p>Please open your email and follow the link to verify your account.</p>
+                    <a href="">Resend the link?</a>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
                 <!-- Unable to send email -->
                 <div id="unableToSendEmail" class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <h3 class="alert-heading">Unable to send you an email to verify your account.</h3>
-                    <p>Please contact customer support to verify your account.</p>
+                    <h3 class="alert-heading">Thanks for registering with Acme Corporation.</h3>
+                    <p>Please contact customer support. We were unable to send you an email to verify your account.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
                 <!-- Unable to create user -->
                 <div id="unableToCreateUser" class="alert alert-danger alert-dismissible fade show" role="alert">
                     <h3 class="alert-heading">Unable to create your account.</h3>
-                    <p>Opps! Looks like we encounterd a problem, please try again.</p>
-                    <p>Or contact customer support to set up your account.</p>
+                    <p>Opps! Looks like we encounterd a problem, please try again. Or contact customer support to set up your account.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 
                 <!-- Email exists -->
                 <div id="emailExists" class="alert alert-danger alert-dismissible fade show" role="alert">
                     <h3 class="alert-heading">Email already registered.</h3>
-                    <p>It looks like that email is already registered.</p>
-                    <p>Please <a href="">sign in</a> to access your account.</p>
-                    <p>Or <a href="">reset your password?</a></p>
+                    <p>It looks like that email is already registered. Please <a href="">sign in</a> to access your account. Or <a href="">reset your password?</a></p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Incorrect password or email -->
+                <div id="incorrectDetails" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Incorrect email or password.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
 
             <!-- Forms -->
-            <div class="col-12 col-lg-6 offset-lg-3 mb-3 box">
+            <div id="forms" class="col-12 col-lg-6 offset-lg-3 mb-3 box">
                 <!-- Sign in -->
                 <form id="signinForm">
                     <div class="form-group">
-                        <label for="signinUsername">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="signinUsername" name="username" aria-describedby="" required>
-                        <small id="" class="form-text text-muted">Username or email address</small>
+                        <label for="signinEmail">Email <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="signinEmail" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="signinPassword">Password <span class="text-danger">*</span></label>
@@ -104,8 +130,12 @@
                 <!-- Register -->
                 <form id="registerForm">
                     <div class="form-group">
-                        <label for="registerUsername">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="registerUsername" name="username" aria-describedby="" required>
+                        <label for="registerFirstName">First Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="registerFirstName" name="firstName" title="" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerLastName">Last Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="registerLastName" name="lastName" required>
                     </div>
                     <div class="form-group">
                         <label for="registerEmail">Email address <span class="text-danger">*</span></label>
@@ -116,7 +146,8 @@
                         <input type="password" class="form-control" id="registerPassword" name="password" required>
                         <small id="" class="form-text text-muted">Password must be at least 8 characters long and contain a number and an uppercase letter</small>
                     </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <button type="button" id="cancelBtn" class="btn btn-primary">Cancel</button>
                 </form>
             </div> <!-- End forms -->
 

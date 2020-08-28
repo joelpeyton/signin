@@ -28,9 +28,14 @@ i {
 }
 
 #verify,
+#resend,
 #unableToSendEmail,
 #unableToCreateUser,
 #emailExists,
+#incorrectDetails {
+   display: none;
+}
+
 #registerForm,
 .changePassword {
    display: none;

@@ -8,13 +8,8 @@ Class User {
 
     // properties
     public $id;
-    public $username;
-    public $name;
-    public $telephone;
-    public $addressOne;
-    public $addressTwo;
-    public $city;
-    public $postcode;
+    public $firstName;
+    public $lastName;
     public $email;
     public $password;
     public $accessToken;
@@ -39,8 +34,19 @@ Class User {
         // execute statement
         $stmt->execute();
 
-        // email already in database return true
+        // email already in database 
+        // populate user object
+        // return true
         if ($stmt->rowCount() > 0) {
+            // get record
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->id = $row["id"];
+            $this->firstName = $row["firstName"];
+            $this->lastName = $row["lastName"];
+            $this->password = $row["password"];
+            $this->status = $row["status"];
+
             return true;
         } 
         
@@ -55,7 +61,8 @@ Class User {
         // prepare query
         $query = "INSERT INTO " . $this->table . "
         SET 
-        username = :username,
+        firstName = :firstName,
+        lastName = :lastName,
         email = :email, 
         password = :password, 
         status = :status, 
@@ -64,7 +71,8 @@ Class User {
         $stmt = $this->conn->prepare($query);
 
         // bind parameters
-        $stmt->bindParam(":username", $this->username);
+        $stmt->bindParam(":firstName", $this->firstName);
+        $stmt->bindParam(":lastName", $this->lastName);
         $stmt->bindParam(":email", $this->email);
         $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
         $stmt->bindParam(":password", $password_hash);

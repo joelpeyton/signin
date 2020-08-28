@@ -9,9 +9,9 @@ if ($_POST) {
 
     // get database connection
     $database = new Database();
-    $db = $database->getConnection();;
+    $db = $database->getConnection();
 
-    // create a new user and set user email
+    // create a new user and set email
     $user = new User($db);
     $user->email = htmlspecialchars(strip_tags($_POST["email"]));
 
@@ -32,7 +32,8 @@ if ($_POST) {
         $result["emailExists"] = false;
 
         // set initial user properties
-        $user->username = htmlspecialchars(strip_tags($_POST["username"]));
+        $user->firstName = htmlspecialchars(strip_tags($_POST["firstName"]));
+        $user->lastName = htmlspecialchars(strip_tags($_POST["lastName"]));
         $user->password = htmlspecialchars(strip_tags($_POST["password"]));
         $user->email = htmlspecialchars(strip_tags($_POST["email"]));
 
@@ -49,7 +50,7 @@ if ($_POST) {
 
             $receiver = $user->email;
             $subject = "Acme Corporation, verify email";
-            $body = "{ $user->username }, Thanks for registering with Acme Corporation.\n";
+            $body = "{ $user->firstName }, Thanks for registering with Acme Corporation.\n";
             $body .= "Please verify your email by clicking the following link\n";
             $body .= "{ $homeUrl }verify/?accessToken={ $accessToken }";
 
