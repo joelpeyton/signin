@@ -16,6 +16,7 @@ const signinBtn = document.getElementById("signinBtn");
 const registerBtn = document.getElementById("registerBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const registerLink = document.getElementById("registerLink");
+const showPassword = document.getElementById("showPassword");
 
 // others
 const heading = document.getElementById("heading");
@@ -97,6 +98,14 @@ registerLink.onclick = function() {
 
 signinBtn.onclick = function() {
     renderSignin();
+}
+
+showPassword.onchange = function() {
+    if (showPassword.checked) {
+        document.getElementById("registerPassword").setAttribute("type", "text");
+    } else {
+        document.getElementById("registerPassword").setAttribute("type", "password");
+    }
 }
 
 // register form event
