@@ -174,7 +174,7 @@ signinForm.onsubmit = function(event) {
         clearAlerts();
         if (jsonResponse.emailExists && jsonResponse.passwordVerified) {
             if (jsonResponse.emailVerified) {
-                window.location.href = "loggedin.html";
+                window.location.href = "account.html";
             }
             else {
                 resend.style.display = "block";

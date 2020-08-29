@@ -8,7 +8,6 @@ const id = document.getElementById("id");
 // buttons and links
 const changePasswordBtn = document.getElementById("changePasswordBtn");
 const signoutBtn = document.getElementById("signoutBtn");
-const cancelBtn = document.getElementById("cancelBtn");
 
 // window onload event
 // populate account form
@@ -62,9 +61,6 @@ signoutBtn.onclick = function() {
     })
 }
 
-cancelBtn.onclick = function() {
-    window.location.href = "loggedin.html";
-}
 
 // update account form 
 updateForm.onsubmit = function(event) {
@@ -118,7 +114,7 @@ updateForm.onsubmit = function(event) {
     })
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
-        //window.location.href = "error.html";
+        window.location.href = "error.html";
     });
 };
 
