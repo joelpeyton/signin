@@ -1,5 +1,7 @@
 window.onload = function () {
-    const token = window.location.href.slice(51,);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const token = urlParams.get("accessToken");
 
     fetch("php/verify.php?accessToken=" + token)
     .then(response => {
