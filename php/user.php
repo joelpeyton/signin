@@ -13,7 +13,7 @@ Class User {
     public $email;
     public $password;
     public $accessToken;
-    public $status = 0; // 0 = pending, 1 = verified
+    public $status = 0; 
 
     // constructor
     public function __construct($db) {
@@ -88,6 +88,66 @@ Class User {
         }
     }
 
+    // get user by id
+    function readOne() {
+        // prepare query
+        $query = "SELECT * FROM " . $this->table . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(1, $this->id);
+
+        // execute statement
+        $stmt->execute();
+ 
+        // populate user object
+        if ($stmt->rowCount() > 0) {
+            // get record
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->firstName = $row["firstName"];
+            $this->lastName = $row["lastName"];
+            $this->password = $row["password"];
+            $this->email = $row["email"];
+
+            return true;
+        } 
+        
+        // else no user with that id exists
+        else {
+            return false;
+        }
+    }
+
+    // update user
+    function updateUser() {
+        // prepare query
+        $query = "UPDATE " . $this->table . "
+        SET 
+        firstName = :firstName,
+        lastName = :lastName,
+        email = :email,
+        password = :password
+        WHERE 
+        id = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(":firstName", $this->firstName);
+        $stmt->bindParam(":lastName", $this->lastName);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":password", $this->password);
+        $stmt->bindParam(":id", $this->id);
+
+        // execute statement
+        if ($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     
 }
 ?>

@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="toggleNav">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#" id="accountBtn"><i class="fas fa-user"></i>Account</a>
+                            <a class="nav-link" href="#" id="accountBtn"><i class="fas fa-user"></i><span id="accountName"></span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" id="signoutBtn"><i class="fas fa-sign-out-alt"></i>Sign Out <span class="sr-only">(current)</span></a>
@@ -51,58 +51,64 @@
             <!-- Heading -->
             <h1 id="heading" class="text-center mb-3">Account details</h1>
 
+            <!-- ALERTS -->
+
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <!-- Success -->
+                <div id="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h3 class="alert-heading">Account succesfully updated.</h3>
+                    <p>The following fields have been updated.</p>
+                    <ul id="updatedFields">
+                        <!-- updated fields -->
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="fail" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Sorry, that email already exists. Unable to update your account.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="noUpdate" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Nothing to update.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Account details -->
             <div class="col-12 col-lg-6 offset-lg-3 mb-3 box">
                 <form id="accountForm">
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="usernameAccount" aria-describedby="" disabled>
+                        <label for="accountFirstName">First Name</label>
+                        <input type="text" class="form-control" id="accountFirstName" pattern="[A-Za-z]+\s?[A-Za-z]+" minlength="1" name="firstName" title="A valid name" required>
                     </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="nameAccount" aria-describedby="">
+                        <label for="accountLastName">Last Name</label>
+                        <input type="text" class="form-control" id="accountLastName" pattern="[A-Za-z]+\s?[A-Za-z]+" minlength="1" name="lastName" title="A valid name" required>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Contact number</label>
-                        <input type="tel" class="form-control" id="contactAccount" aria-describedby="">
-                    </div>
-                    <div class="form-group">
-                        <label for="addressOne">Address</label>
-                        <input type="text" class="form-control" id="addressOneAccount" aria-describedby="">
-                    </div>
-                    <div class="form-group">
-                        <label for="addressTwo">Address</label>
-                        <input type="text" class="form-control" id="addressTwoAccount" aria-describedby="">
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control" id="cityAccount" aria-describedby="">
-                    </div>
-                    <div class="form-group">
-                        <label for="postcode">Postcode</label>
-                        <input type="text" class="form-control" id="postcodeAccount" aria-describedby="">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="emailAccount">
+                        <label for="accountEmail">Email address</label>
+                        <input type="email" class="form-control" id="accountEmail" name="email" required>
                     </div>
                     <div class="form-group">
                         <a href="#" id="changePasswordBtn">Change Password?</a>
                     </div>
                     <div class="form-group changePassword">
-                        <label for="oldPassword">Old Password</label>
-                        <input type="password" class="form-control" id="oldPasswordAccount">
-                    </div>
-                    <div class="form-group changePassword">
                         <label for="newPassword">New Password</label>
-                        <input type="password" class="form-control" id="newPasswordAccount">
+                        <input type="password" class="form-control" id="newPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" minlength="8" name="password" title="Password must be at least 8 characters long and contain a number and an uppercase letter">
                         <small id="" class="form-text text-muted">Password must be at least 8 characters long and contain a number and an uppercase letter</small>
                     </div>
-                    <div class="form-group changePassword">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPasswordAccount">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" id="cancelBtn" class="btn btn-primary">Cancel</button>
                 </form>
             </div>
 

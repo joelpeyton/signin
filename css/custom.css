@@ -36,6 +36,12 @@ i {
    display: none;
 }
 
+#success,
+#fail,
+#noUpdate {
+   display: none;
+}
+
 #registerForm,
 .changePassword {
    display: none;
