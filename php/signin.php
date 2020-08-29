@@ -34,7 +34,7 @@ if ($_POST) {
                 $_SESSION["userID"] = $user->id;
                 $_SESSION["firstName"] = $user->firstName;
                 $_SESSION["lastName"] = $user->lastName;
-                $_SESSION["email"] = $user->email; 
+                $_SESSION["email"] = $user->email;
 
                 $result["emailVerified"] = true;
 
@@ -53,7 +53,7 @@ if ($_POST) {
         $result["emailExists"] = false;
     }
 
-    echo json_encode($result); 
+    echo json_encode($result);
 }
 
 ?>

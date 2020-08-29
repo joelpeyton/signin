@@ -167,7 +167,6 @@ signinForm.onsubmit = function(event) {
     .then(response => {
         if (!response.ok) {
             window.location.href = "error.html";
-            throw new Error("Network response was not ok");
         }
         return response.json();
     })
@@ -188,7 +187,7 @@ signinForm.onsubmit = function(event) {
         }
     })
     .catch(error => {
-        console.error("There has been a problem with your fetch operation:", error);
         window.location.href = "error.html";
+        console.error("There has been a problem with your fetch operation:", error);
     });
 };

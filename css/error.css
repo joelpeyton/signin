@@ -11,7 +11,7 @@ body {
     display: inline-block;
 }
 
-.four {
+.code {
     position: relative; 
     top: 12vw; 
     font-size: 30vw;
@@ -45,7 +45,7 @@ hr {
         width: 50vw;
     }
     
-    .four {
+    .code {
         top: 7vw;
         font-size: 22vw;
     }
@@ -58,7 +58,7 @@ hr {
         width: 25vw;
     }
     
-    .four {
+    .code {
         top: 5vw;
         font-size: 10vw;
     }
