@@ -42,6 +42,12 @@ i {
    display: none;
 }
 
+#verified,
+#alreadyVerified,
+#notVerified {
+   display: none;
+}
+
 #registerForm,
 .changePassword {
    display: none;

@@ -148,6 +148,63 @@ Class User {
             return false;
         }
     }
+
+    // check if access token exists
+    function tokenExists() {
+        // prepare query
+        $query = "SELECT * FROM " . $this->table . " WHERE accessToken = ?";
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(1, $this->accessToken);
+
+        // execute statement
+        $stmt->execute();
+
+        // token exists
+        // get user id
+        // change status to 1
+        // return true
+        if ($stmt->rowCount() > 0) {
+            // get record
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->id = $row["id"];
+            $this->status = $row["status"];
+
+            return true;
+        } 
+        
+        // else no user with that email exists
+        else {
+            return false;
+        }
+    }
+
+    // update users status
+    function updateStatus() {
+        // prepare query
+        $query = "UPDATE " . $this->table . "
+        SET 
+        status = :status
+        WHERE 
+        id = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(":status", $this->status);
+        $stmt->bindParam(":id", $this->id);
+
+        // execute statement
+        if ($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     
 }
 ?>

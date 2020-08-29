@@ -52,7 +52,7 @@ if ($_POST) {
             $subject = "Acme Corporation, verify email";
             $body = "{ $user->firstName }, Thanks for registering with Acme Corporation.\n";
             $body .= "Please verify your email by clicking the following link\n";
-            $body .= "{ $homeUrl }verify/?accessToken={ $accessToken }";
+            $body .= "{ $homeUrl }verify.html?accessToken={ $accessToken }";
 
             if ($utils->sendMail($receiver, $subject, $body)) {
                 $result["emailSent"] = true;

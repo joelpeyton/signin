@@ -3,6 +3,7 @@ const updateForm = document.getElementById("accountForm");
 const firstName = document.getElementById("accountFirstName");
 const lastName = document.getElementById("accountLastName");
 const email = document.getElementById("accountEmail");
+const password = document.getElementById("newPassword");
 const id = document.getElementById("id");
 
 // buttons and links
@@ -45,15 +46,20 @@ changePasswordBtn.onclick = function() {
     changePasswordBtn.style.display = "none";
 }
 
-signoutBtn.onclick = function() {
-    // Need to remove capability to press back button to access account
-    window.location.href = "index.html";
+signoutBtn.onclick = function() {   
     fetch("php/signout.php")
     .then(response => {
         if (!response.ok) {
             window.location.href = "error.html";
             throw new Error("Network response was not ok");
         }
+        firstName.value = "";
+        lastName.value = "";
+        email.value = "";
+        id.value = "";
+        password.value = "";
+        document.getElementById("accountName").innerText = "";
+        window.location.href = "index.html";
     })  
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
