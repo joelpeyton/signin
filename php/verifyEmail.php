@@ -21,17 +21,17 @@ if ($_GET) {
             // change status and update 
             $user->status = "1";
             $user->updateStatus();
-            $result["status"] = "updated";
+            header("Location: ../verify.html?result=1"); 
         }
         // else already verified
         else {
-            $result["error"] = "verified";
+            header("Location: ../verify.html?result=2");
         }
         
     }
     // no access token exists
     else {
-        $result["error"] = "no token";
+        header("Location: ../verify.html?result=3");
     }
 
     echo json_encode($result);
