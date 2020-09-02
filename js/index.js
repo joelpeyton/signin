@@ -1,3 +1,5 @@
+import { clearAlerts, showPassword } from "./utils.js";
+
 // alerts
 const verify = document.getElementById("verify");
 const resend = document.getElementById("resend");
@@ -18,7 +20,6 @@ const signinBtn = document.getElementById("signinBtn");
 const registerBtn = document.getElementById("registerBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const registerLink = document.getElementById("registerLink");
-const showPassword = document.getElementById("showPassword");
 const forgottenLink = document.getElementById("forgottenLink");
 
 // others
@@ -86,6 +87,7 @@ function renderForgotten() {
     heading.innerText = "Reset your password";
     signinBtn.parentElement.classList.remove("active");
     registerBtn.parentElement.classList.remove("active");
+    document.querySelector("#forgottenEmail").value = "";
 }
 
 function clearRegisterForm() {
@@ -100,13 +102,11 @@ function clearSigninForm() {
     signinForm.password.value = "";
 }
 
-function clearAlerts() {
-    const alertCollection = document.getElementsByClassName("alert");
-
-    for (let i = 0; i < alertCollection.length; i++) {
-        alertCollection[i].style.display = "none";
-    }
+window.onload = function() {
+    clearSigninForm();
+    showPassword();
 }
+
 
 // button events 
 cancelBtn.onclick = function() {
@@ -125,17 +125,12 @@ signinBtn.onclick = function() {
     renderSignin();
 }
 
-showPassword.onchange = function() {
-    if (showPassword.checked) {
-        document.getElementById("registerPassword").setAttribute("type", "text");
-    } else {
-        document.getElementById("registerPassword").setAttribute("type", "password");
-    }
-}
 
+// links
 forgottenLink.onclick = function() {
     renderForgotten();
 }
+
 
 // register form event
 registerForm.onsubmit = function(event) {
@@ -149,29 +144,36 @@ registerForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            window.location.href = "error.html";
             throw new Error("Network response was not ok");
         }
         return response.json();
     }) 
     .then(jsonResponse => {
         clearAlerts();
+
+        // email aready exists
         if (jsonResponse.emailExists) {
             emailExists.style.display = "block";
             heading.style.display = "none";
             forms.style.display = "none";
         } 
+
         else {
+            // user created success & email sent success
             if (jsonResponse.userCreated && jsonResponse.emailSent) {
                 verify.style.display = "block";
                 heading.style.display = "none";
                 forms.style.display = "none";
             }
+
+            // user created success & email sent fail
             else if (jsonResponse.userCreated && !jsonResponse.emailSent) {
                 unableToSendEmail.style.display = "block";
                 heading.style.display = "none";
                 forms.style.display = "none";
             } 
+
+            // uesr created fail
             else if (!jsonResponse.userCreated) {
                 unableToCreateUser.style.display = "block";
             } 
@@ -179,7 +181,6 @@ registerForm.onsubmit = function(event) {
     })
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
-        window.location.href = "error.html";
     });
 };
 
@@ -195,28 +196,35 @@ signinForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            window.location.href = "error.html";
+            throw new Error("Network response was not ok");
         }
         return response.json();
     })
     .then(jsonResponse => {
         clearAlerts();
+
+        // email exists
         if (jsonResponse.emailExists && jsonResponse.passwordVerified) {
+
+            // email verified
             if (jsonResponse.emailVerified) {
                 window.location.href = "account.html";
             }
+
+            // not verified
             else {
                 resend.style.display = "block";
                 clearSigninForm();
             }
         }
+
+        // incorrect email
         else {
             incorrectDetails.style.display = "block";
             signinForm.password.value = "";
         }
     })
     .catch(error => {
-        window.location.href = "error.html";
         console.error("There has been a problem with your fetch operation:", error);
     });
 };
@@ -235,13 +243,14 @@ forgottenForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            //window.location.href = "error.html";
             throw new Error("Network response was not ok");
         }
-        document.getElementById("forgottenVerification").style.display = "block";
+
+        // email link sent
+        const forgotten = document.querySelector("#forgottenVerification");
+        forgotten.style.display = "block";
     })
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
-        //window.location.href = "error.html";
     });
 };

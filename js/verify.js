@@ -2,13 +2,16 @@ window.onload = function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const result = urlParams.get("result");
+    const verified = document.querySelector("verified");
+    const already = document.querySelector("alreadyVerified");
+    const not = document.querySelector("notVerified");
 
     if (result == "1") {
-        document.getElementById("verified").style.display = "block";
+        verified.style.display = "block";
     } else if (result == "2") {
-        document.getElementById("alreadyVerified").style.display = "block";
+        already.style.display = "block";
     } else {
-        document.getElementById("notVerified").style.display = "block";
+        not.style.display = "block";
     }
 };
 

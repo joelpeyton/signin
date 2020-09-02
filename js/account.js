@@ -1,10 +1,13 @@
-// signin form 
+import { clearAlerts, showPassword } from "./utils.js";
+
+// form 
 const updateForm = document.getElementById("accountForm");
 const firstName = document.getElementById("accountFirstName");
 const lastName = document.getElementById("accountLastName");
 const email = document.getElementById("accountEmail");
 const password = document.getElementById("newPassword");
 const id = document.getElementById("id");
+const accountName = document.querySelector("#accountName");
 
 // buttons and links
 const changePasswordBtn = document.getElementById("changePasswordBtn");
@@ -14,24 +17,27 @@ const signoutBtn = document.getElementById("signoutBtn");
 // populate account form
 window.onload = function() {
     clearAlerts();
+    showPassword();
+
     fetch("php/account.php")
     .then(response => {
         if (!response.ok) {
-            window.location.href = "error.html";
             throw new Error("Network response was not ok");
         }
         return response.json();
     })
     .then(jsonResponse => {
+
+        // populate form fields
         firstName.value = jsonResponse.firstName;
         lastName.value = jsonResponse.lastName;
         email.value = jsonResponse.email;
         id.value = jsonResponse.userID;
-        document.getElementById("accountName").innerText = jsonResponse.firstName;
+        accountName.innerText = jsonResponse.firstName;
+
     })
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
-        window.location.href = "error.html";
     });
 }
 
@@ -50,20 +56,21 @@ signoutBtn.onclick = function() {
     fetch("php/signout.php")
     .then(response => {
         if (!response.ok) {
-            window.location.href = "error.html";
             throw new Error("Network response was not ok");
         }
+
+        // clear form details on signout
         firstName.value = "";
         lastName.value = "";
         email.value = "";
         id.value = "";
         password.value = "";
-        document.getElementById("accountName").innerText = "";
+        accountName.innerText = "";
         window.location.href = "index.html";
+
     })  
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
-        window.location.href = "error.html";
     })
 }
 
@@ -81,23 +88,29 @@ updateForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            window.location.href = "error.html";
             throw new Error("Network response was not ok");
         }
         return response.json();
     })
     .then(jsonResponse => {
+        const fail = document.querySelector("#fail");
+
+        // email already taken
         if (jsonResponse.emailExists) {
-            document.getElementById("fail").style.display = "block";
+            fail.style.display = "block";
         } 
 
         else {
             const changes = jsonResponse.changed;
             const user = jsonResponse.user;
+
+            // if changes to deatils
             if (changes.length > 0) {
-                document.getElementById("success").style.display = "block";
+                const success = document.querySelector("#success");
+                success.style.display = "block";
                 const updatedFields = document.getElementById("updatedFields");
                 const listItemCollection = updatedFields.children;
+                
                 for (let i = listItemCollection.length - 1; i >= 0; i--) {
                     listItemCollection[i].remove();
                 }
@@ -108,26 +121,19 @@ updateForm.onsubmit = function(event) {
                     updatedFields.appendChild(listItem);
     
                     if (changes[i] == "First Name") {
-                        document.getElementById("accountName").innerText = user.firstName;
+                        accountName.innerText = user.firstName;
                     }
                 }
                 
             }
             else {
-                document.getElementById("noUpdate").style.display = "block";
+                const noUpdate = document.querySelector("#noUpdate");
+                noUpdate.style.display = "block";
             }
         }
     })
     .catch(error => {
         console.error("There has been a problem with your fetch operation:", error);
-        window.location.href = "error.html";
     });
 };
 
-function clearAlerts() {
-    const alertCollection = document.getElementsByClassName("alert");
-
-    for (let i = 0; i < alertCollection.length; i++) {
-        alertCollection[i].style.display = "none";
-    }
-}

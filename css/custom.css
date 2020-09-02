@@ -27,6 +27,8 @@ i {
    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
+/* INDEX */
+
 #verify,
 #resend,
 #unableToSendEmail,
@@ -37,11 +39,21 @@ i {
    display: none;
 }
 
+#registerForm,
+#forgotten,
+.changePassword {
+   display: none;
+}
+
+/* RESET */ 
+
 #reset,
 #notReset,
 #noToken {
    display: none;
 }
+
+/* ACCOUNT */
 
 #success,
 #fail,
@@ -49,17 +61,15 @@ i {
    display: none;
 }
 
+/* VERIFY */
+
 #verified,
 #alreadyVerified,
 #notVerified {
    display: none;
 }
 
-#registerForm,
-#forgotten,
-.changePassword {
-   display: none;
-}
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
