@@ -46,6 +46,7 @@ Class User {
             $this->lastName = $row["lastName"];
             $this->password = $row["password"];
             $this->status = $row["status"];
+            $this->accessToken = $row["accessToken"];
 
             return true;
         } 
@@ -205,6 +206,29 @@ Class User {
         }
     }
 
-    
+    // update users status
+    function resetPassword() {
+        // prepare query
+        $query = "UPDATE " . $this->table . "
+        SET 
+        password = :password
+        WHERE 
+        accessToken = :accessToken";
+
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(":accessToken", $this->accessToken);
+        $password_hash = password_hash($this->password, PASSWORD_BCRYPT);
+        $stmt->bindParam(":password", $password_hash);
+
+        // execute statement
+        if ($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 ?>

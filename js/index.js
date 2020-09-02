@@ -10,6 +10,8 @@ const emailExists = document.getElementById("emailExists");
 const forms = document.getElementById("forms");
 const signinForm = document.getElementById("signinForm");
 const registerForm = document.getElementById("registerForm");
+const forgottenForm = document.getElementById("forgotten");
+
 
 // buttons and links
 const signinBtn = document.getElementById("signinBtn");
@@ -17,6 +19,7 @@ const registerBtn = document.getElementById("registerBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const registerLink = document.getElementById("registerLink");
 const showPassword = document.getElementById("showPassword");
+const forgottenLink = document.getElementById("forgottenLink");
 
 // others
 const heading = document.getElementById("heading");
@@ -38,6 +41,7 @@ function renderSignin() {
     signinForm.style.display = "block";
     registerForm.style.display = "none";
     registerBox.style.display = "block";
+    forgottenForm.style.display = "none";
     heading.innerText = "Sign in to Acme";
     signinBtn.parentElement.classList.add("active");
     registerBtn.parentElement.classList.remove("active");
@@ -58,9 +62,30 @@ function renderRegister() {
     signinForm.style.display = "none";
     registerForm.style.display = "block";
     registerBox.style.display = "none";
+    forgottenForm.style.display = "none";
     heading.innerText = "Create your account";
     signinBtn.parentElement.classList.remove("active");
     registerBtn.parentElement.classList.add("active");
+}
+
+function renderForgotten() {
+    if (forms.style.display == "none") {
+        forms.style.display = "block";
+    }
+
+    if (heading.style.display == "none") {
+        heading.style.display = "block";
+    }
+
+    clearAlerts();
+
+    signinForm.style.display = "none";
+    registerForm.style.display = "none";
+    registerBox.style.display = "none";
+    forgottenForm.style.display = "block";
+    heading.innerText = "Reset your password";
+    signinBtn.parentElement.classList.remove("active");
+    registerBtn.parentElement.classList.remove("active");
 }
 
 function clearRegisterForm() {
@@ -106,6 +131,10 @@ showPassword.onchange = function() {
     } else {
         document.getElementById("registerPassword").setAttribute("type", "password");
     }
+}
+
+forgottenLink.onclick = function() {
+    renderForgotten();
 }
 
 // register form event
@@ -189,5 +218,30 @@ signinForm.onsubmit = function(event) {
     .catch(error => {
         window.location.href = "error.html";
         console.error("There has been a problem with your fetch operation:", error);
+    });
+};
+
+
+// forgotten password form 
+forgottenForm.onsubmit = function(event) {
+    clearAlerts();
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("php/forgotten.php", {
+        method: "post",
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            //window.location.href = "error.html";
+            throw new Error("Network response was not ok");
+        }
+        document.getElementById("forgottenVerification").style.display = "block";
+    })
+    .catch(error => {
+        console.error("There has been a problem with your fetch operation:", error);
+        //window.location.href = "error.html";
     });
 };

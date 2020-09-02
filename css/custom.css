@@ -32,7 +32,14 @@ i {
 #unableToSendEmail,
 #unableToCreateUser,
 #emailExists,
-#incorrectDetails {
+#incorrectDetails,
+#forgottenVerification {
+   display: none;
+}
+
+#reset,
+#notReset,
+#noToken {
    display: none;
 }
 
@@ -49,6 +56,7 @@ i {
 }
 
 #registerForm,
+#forgotten,
 .changePassword {
    display: none;
 }

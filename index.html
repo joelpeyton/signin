@@ -107,6 +107,14 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
+                <!-- Forgotten email -->
+                <div id="forgottenVerification" class="alert alert-success alert-dismissible fade show" role="alert">
+                    We've sent you an email so you can reset your password.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Forms -->
@@ -122,7 +130,7 @@
                         <input type="password" class="form-control" id="signinPassword" name="password" required>
                     </div>
                     <div class="form-group">
-                        <a href="">Forgotten password?</a>
+                        <a id="forgottenLink" href="#">Forgotten password?</a>
                     </div>
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
@@ -152,6 +160,15 @@
                     </div>
                     <button type="submit" class="btn btn-success">Register</button>
                     <button type="button" id="cancelBtn" class="btn btn-primary">Cancel</button>
+                </form>
+
+                <!-- Sign in -->
+                <form id="forgotten">
+                    <div class="form-group">
+                        <label for="signinEmail">Email <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="forgottenEmail" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div> <!-- End forms -->
 

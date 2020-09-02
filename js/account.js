@@ -1,4 +1,4 @@
-// form 
+// signin form 
 const updateForm = document.getElementById("accountForm");
 const firstName = document.getElementById("accountFirstName");
 const lastName = document.getElementById("accountLastName");
