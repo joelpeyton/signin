@@ -8,6 +8,8 @@ const email = document.getElementById("accountEmail");
 const password = document.getElementById("newPassword");
 const id = document.getElementById("id");
 const accountName = document.querySelector("#accountName");
+const show = document.querySelector("#showPasswordDiv");
+show.style.display = "none";
 
 // buttons and links
 const changePasswordBtn = document.getElementById("changePasswordBtn");
@@ -18,7 +20,7 @@ const signoutBtn = document.getElementById("signoutBtn");
 window.onload = function() {
     clearAlerts();
     showPassword();
-
+    
     fetch("php/account.php")
     .then(response => {
         if (!response.ok) {
@@ -45,6 +47,7 @@ window.onload = function() {
 
 // button events
 changePasswordBtn.onclick = function() {
+    show.style.display = "block";
     const passwordCollection = document.getElementsByClassName("changePassword");
 
     for (let i = 0; i < passwordCollection.length; i++) {

@@ -1,6 +1,6 @@
 function showPassword() {
     const show = document.getElementById("showPassword");
-    const password = document.getElementById("password");
+    const password = document.getElementById("password") || document.getElementById("newPassword");
 
     show.onchange = function() {
         if (show.checked) {
