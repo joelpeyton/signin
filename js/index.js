@@ -144,7 +144,8 @@ registerForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error("Network response was not ok");
+            let error = response.status + ":" + response.statusText; 
+            throw new Error(error);
         }
         return response.json();
     }) 
@@ -180,7 +181,8 @@ registerForm.onsubmit = function(event) {
         } 
     })
     .catch(error => {
-        console.error("There has been a problem with your fetch operation:", error);
+        let url = "error.html?error=" + error;
+        window.location.href = url;
     });
 };
 
@@ -196,7 +198,8 @@ signinForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error("Network response was not ok");
+            let error = response.status + ":" + response.statusText; 
+            throw new Error(error);
         }
         return response.json();
     })
@@ -225,7 +228,8 @@ signinForm.onsubmit = function(event) {
         }
     })
     .catch(error => {
-        console.error("There has been a problem with your fetch operation:", error);
+        let url = "error.html?error=" + error;
+        window.location.href = url;
     });
 };
 
@@ -243,7 +247,8 @@ forgottenForm.onsubmit = function(event) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error("Network response was not ok");
+            let error = response.status + ":" + response.statusText; 
+            throw new Error(error);
         }
 
         // email link sent
@@ -251,6 +256,7 @@ forgottenForm.onsubmit = function(event) {
         forgotten.style.display = "block";
     })
     .catch(error => {
-        console.error("There has been a problem with your fetch operation:", error);
+        let url = "error.html?error=" + error;
+        window.location.href = url;
     });
 };
