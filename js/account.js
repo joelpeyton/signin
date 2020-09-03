@@ -14,6 +14,7 @@ show.style.display = "none";
 // buttons and links
 const changePasswordBtn = document.getElementById("changePasswordBtn");
 const signoutBtn = document.getElementById("signoutBtn");
+const deleteBtn = document.querySelector("#deleteBtn");
 
 // window onload event
 // populate account form
@@ -43,7 +44,7 @@ window.onload = function() {
         let url = "error.html?error=" + error;
         window.location.href = url;
     });
-}
+};
 
 // button events
 changePasswordBtn.onclick = function() {
@@ -52,10 +53,10 @@ changePasswordBtn.onclick = function() {
 
     for (let i = 0; i < passwordCollection.length; i++) {
         passwordCollection[i].style.display = "block";
-    };
+    }
 
     changePasswordBtn.style.display = "none";
-}
+};
 
 signoutBtn.onclick = function() {   
     fetch("php/signout.php")
@@ -79,9 +80,65 @@ signoutBtn.onclick = function() {
     .catch(error => {
         let url = "error.html?error=" + error;
         window.location.href = url;
-    })
-}
+    });
+};
 
+deleteBtn.onclick = function() {
+
+    if (sessionStorage.getItem("loggedIn") == "true") {
+        fetch("php/delete.php?id=" + id.value)
+        .then(response => {
+            if (!response.ok) {
+                let error = response.status + ":" + response.statusText; 
+                throw new Error(error);
+            }
+            return response.json();
+        })
+        .then(jsonResponse => {
+            
+            const deleteAlert = document.querySelector("#deleted");
+
+            if (deleteAlert.classList.contains("alert.success")) {
+                deleteAlert.classList.remove("alert-success");
+            }
+
+
+            if (deleteAlert.classList.contains("alert.danger")) {
+                deleteAlert.classList.remove("alert-danger");
+            }
+
+            // no user found
+            if (jsonResponse.userExists === false) {
+                deleteAlert.innerText = "No user found. Please contact customer support.";
+                deleteAlert.classList.add("alert-danger");
+            }
+
+            // user found
+            else {
+
+                // delete success
+                if (jsonResponse.deleted === true) {
+                    sessionStorage.setItem("loggedIn", "false");
+                    window.location.href= "index.html";
+                }
+
+                // delete fail
+                else {
+                    deleteAlert.innerText = "Unable to delete your account. Please contact customer support.";
+                    deleteAlert.classList.add("alert-danger");
+                }
+            }
+        })
+        .catch(error => {
+            let url = "error.html?error=" + error;
+            window.location.href = url;
+        });
+    }
+
+    else {
+        window.location.href = "index.html";
+    }
+};
 
 // update account form 
 updateForm.onsubmit = function(event) {
@@ -147,6 +204,7 @@ updateForm.onsubmit = function(event) {
             window.location.href = url;
         });
     }
+
     else {
         window.location.href = "index.html";
     }

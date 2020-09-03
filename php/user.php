@@ -230,5 +230,48 @@ Class User {
             return false;
         }
     }
+
+    // delete user
+    function deleteUser() {
+        // prepare query
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(":id", $this->id);
+
+        // execute statement
+        if ($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    } 
+
+    function addUserToDeleted() {
+        // prepare query
+        $query = "INSERT INTO deletedUsers
+        SET
+        firstName = :firstName,
+        lastName = :lastName,
+        email = :email";
+
+        $stmt = $this->conn->prepare($query);
+
+        // bind parameters
+        $stmt->bindParam(":firstName", $this->firstName);
+        $stmt->bindParam(":lastName", $this->lastName);
+        $stmt->bindParam(":email", $this->email);
+
+        // execute statement
+        if ($stmt->execute()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 ?>

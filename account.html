@@ -66,6 +66,7 @@
                     </button>
                 </div>
 
+                <!-- Fail -->
                 <div id="fail" class="alert alert-danger alert-dismissible fade show" role="alert">
                     Sorry, that email already exists. Unable to update your account.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -73,8 +74,17 @@
                     </button>
                 </div>
 
+                <!-- Nothing to update -->
                 <div id="noUpdate" class="alert alert-danger alert-dismissible fade show" role="alert">
                     Nothing to update.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Deleted -->
+                <div id="deleted" class="alert alert-success alert-dismissible fade show" role="alert">
+                   
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -112,8 +122,23 @@
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
                     <button type="submit" class="btn btn-success">Update</button>
-                    <button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
+                    <button type="button" id="" class="btn btn-danger" data-toggle="modal" data-target="#modal">Delete</button>
                 </form>
+            </div>
+
+             <!-- Confirmation Modal -->
+             <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <i class="fas fa-exclamation-circle mr-2 text-danger"></i>Are you sure you want to delete your account?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="noBtn">No</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtn">Yes</button>
+                    </div>
+                </div>
+                </div>
             </div>
 
         </div>
