@@ -60,6 +60,8 @@ passwordReset.onsubmit = function(event) {
                 notReset.style.display = "block";
             }
         }
+
+        document.querySelector("#newPassword").value = "";
     })
     .catch(error => {
         let url = "error.html?error=" + error;
