@@ -24,9 +24,10 @@ if ($_POST) {
     // if email exists
     if ($emailExists) {
         $receiver = $user->email;
-        $subject = "Acme Corporation, reset password";
-        $body = "{ $user->firstName }, We got a request to reset your Acme account password. If that was you, please follow the link below:\n";
-        $body .= "{ $homeUrl }/php/changePassword.php?accessToken={ $user->accessToken }";
+        $subject = 'Reset password';
+        $body = '<p>' . $user->firstName . ', We got a request to reset your Acme account password.</p>';
+        $body .= '<p>If that was you, please paste the link below into your favourite browser:</p>';
+        $body .= $homeUrl . 'php/changePassword.php?accessToken=' . $user->accessToken;
 
         $utils->sendMail($receiver, $subject, $body);
         

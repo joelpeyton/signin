@@ -49,10 +49,10 @@ if ($_POST) {
             $result["userCreated"] = true;
 
             $receiver = $user->email;
-            $subject = "Acme Corporation, verify email";
-            $body = "{ $user->firstName }, Thanks for registering with Acme Corporation.\n";
-            $body .= "Please verify your email by clicking the following link\n";
-            $body .= "{ $homeUrl }/php/verifyEmail.php?accessToken={ $accessToken }";
+            $subject = "Verify email";
+            $body = '<p>' . $user->firstName. ', Thanks for registering with Acme Corporation. </p>';
+            $body .= '<p>Please verify your email by pasting the following link into your favourite browser.</p>';
+            $body .= '<p>' .$homeUrl . 'php/verifyEmail.php?accessToken=' . $accessToken . '</p>';
 
             if ($utils->sendMail($receiver, $subject, $body)) {
                 $result["emailSent"] = true;
