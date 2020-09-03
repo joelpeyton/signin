@@ -65,6 +65,7 @@ signoutBtn.onclick = function() {
             throw new Error(error);
         }
 
+        sessionStorage.setItem("loggedIn", "false");
         // clear form details on signout
         firstName.value = "";
         lastName.value = "";
@@ -89,60 +90,65 @@ updateForm.onsubmit = function(event) {
 
     const formData = new FormData(this);
 
-    fetch("php/update.php", {
-        method: "post",
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            let error = response.status + ":" + response.statusText; 
-            throw new Error(error);
-        }
-        return response.json();
-    })
-    .then(jsonResponse => {
-        const fail = document.querySelector("#fail");
-
-        // email already taken
-        if (jsonResponse.emailExists) {
-            fail.style.display = "block";
-        } 
-
-        else {
-            const changes = jsonResponse.changed;
-            const user = jsonResponse.user;
-
-            // if changes to deatils
-            if (changes.length > 0) {
-                const success = document.querySelector("#success");
-                success.style.display = "block";
-                const updatedFields = document.getElementById("updatedFields");
-                const listItemCollection = updatedFields.children;
-                
-                for (let i = listItemCollection.length - 1; i >= 0; i--) {
-                    listItemCollection[i].remove();
-                }
-    
-                for (let i = 0; i < changes.length; i++) {
-                    let listItem = document.createElement("li");
-                    listItem.innerText = changes[i];
-                    updatedFields.appendChild(listItem);
-    
-                    if (changes[i] == "First Name") {
-                        accountName.innerText = user.firstName;
-                    }
-                }
-                
+    if (sessionStorage.getItem("loggedIn") == "true") {
+        fetch("php/update.php", {
+            method: "post",
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                let error = response.status + ":" + response.statusText; 
+                throw new Error(error);
             }
+            return response.json();
+        })
+        .then(jsonResponse => {
+            const fail = document.querySelector("#fail");
+    
+            // email already taken
+            if (jsonResponse.emailExists) {
+                fail.style.display = "block";
+            } 
+    
             else {
-                const noUpdate = document.querySelector("#noUpdate");
-                noUpdate.style.display = "block";
+                const changes = jsonResponse.changed;
+                const user = jsonResponse.user;
+    
+                // if changes to deatils
+                if (changes.length > 0) {
+                    const success = document.querySelector("#success");
+                    success.style.display = "block";
+                    const updatedFields = document.getElementById("updatedFields");
+                    const listItemCollection = updatedFields.children;
+                    
+                    for (let i = listItemCollection.length - 1; i >= 0; i--) {
+                        listItemCollection[i].remove();
+                    }
+        
+                    for (let i = 0; i < changes.length; i++) {
+                        let listItem = document.createElement("li");
+                        listItem.innerText = changes[i];
+                        updatedFields.appendChild(listItem);
+        
+                        if (changes[i] == "First Name") {
+                            accountName.innerText = user.firstName;
+                        }
+                    }
+                    
+                }
+                else {
+                    const noUpdate = document.querySelector("#noUpdate");
+                    noUpdate.style.display = "block";
+                }
             }
-        }
-    })
-    .catch(error => {
-        let url = "error.html?error=" + error;
-        window.location.href = url;
-    });
+        })
+        .catch(error => {
+            let url = "error.html?error=" + error;
+            window.location.href = url;
+        });
+    }
+    else {
+        window.location.href = "index.html";
+    }
 };
 

@@ -211,6 +211,7 @@ signinForm.onsubmit = function(event) {
 
             // email verified
             if (jsonResponse.emailVerified) {
+                sessionStorage.setItem("loggedIn", "true");
                 window.location.href = "account.html";
             }
 

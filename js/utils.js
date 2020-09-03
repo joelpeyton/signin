@@ -20,5 +20,4 @@ function clearAlerts() {
     }
 }
 
-
 export { clearAlerts, showPassword };

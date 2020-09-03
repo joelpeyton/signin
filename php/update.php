@@ -67,7 +67,7 @@ if ($_POST) {
     }
 
     // update if differences
-    if ($changes && !$emailExists) {
+    if ($changes && !$emailExists && $_SESSION["loggedIn"] == true) {
         $result["updated"] = $user->updateUser();
         $result["user"] = $user;
     }
